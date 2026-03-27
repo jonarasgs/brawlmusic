@@ -3,76 +3,72 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Starr Park Jukebox</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@500;700;900&display=swap"
-      rel="stylesheet"
-    />
+    <title>Starr Sound • Player</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="noise-overlay" aria-hidden="true"></div>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <h1 class="brand">Starr Sound</h1>
+        <p class="muted">Player estilo streaming</p>
 
-    <header class="top-bar">
-      <nav class="main-nav">
-        <a class="nav-pill active" href="index.html">🎵 Jukebox</a>
-        <a class="nav-pill" href="albums.html">🎫 Álbuns / Eventos</a>
-      </nav>
+        <nav class="menu">
+          <button class="menu-btn active">Início</button>
+          <button class="menu-btn">Sua biblioteca</button>
+          <button class="menu-btn">Eventos</button>
+          <button class="menu-btn">Curtidas</button>
+        </nav>
 
-      <p class="badge">Fan Project • Starr Park Vibes</p>
-      <h1>Starr Park Jukebox</h1>
-      <p class="subtitle">Rádio temática no estilo parque retrô + caos de arena</p>
-    </header>
+        <section>
+          <h2 class="section-title">Playlists rápidas</h2>
+          <div id="quickPlaylists" class="quick-list"></div>
+        </section>
+      </aside>
 
-    <main class="layout">
-      <section class="panel hero-panel">
-        <div class="hero-copy">
-          <h2>Bem-vindo ao parque 🎢</h2>
-          <p>
-            Interface inspirada no clima de <strong>Starr Park</strong>: cores fortes,
-            placas de atrações, brilho neon e botões com feedback arcade.
-          </p>
-          <div class="hero-actions">
-            <button id="randomTrackBtn" class="action-btn">Tocar música aleatória</button>
-            <a href="albums.html" class="ghost-btn">Ver álbuns/eventos</a>
-          </div>
+      <main class="content">
+        <header class="topbar">
+          <input id="searchInput" class="search" type="search" placeholder="Buscar música, evento, artista..." />
+          <span class="tag">Fonte alvo: Nougat</span>
+        </header>
+
+        <section>
+          <h2>Destaques</h2>
+          <div id="highlightGrid" class="highlight-grid"></div>
+        </section>
+
+        <section>
+          <h2>Todas as faixas</h2>
+          <div id="tracksTable" class="tracks-table"></div>
+        </section>
+      </main>
+    </div>
+
+    <footer class="playerbar">
+      <div class="nowplaying">
+        <img id="coverImage" src="assets/covers/placeholder-cover.svg" alt="Capa" />
+        <div>
+          <p id="nowTitle">Nenhuma faixa</p>
+          <p id="nowMeta" class="muted">Escolha uma música para tocar</p>
         </div>
-        <div class="hero-art" role="img" aria-label="Arte abstrata inspirada em parque temático"></div>
-      </section>
+      </div>
 
-      <section class="panel uploader-panel">
-        <h3>Adicionar conteúdo real</h3>
-        <ol>
-          <li>Envie os MP3/OGG para <code>assets/music/</code>.</li>
-          <li>Envie capas para <code>assets/covers/</code>.</li>
-          <li>Atualize o array <code>tracks</code> em <code>script.js</code>.</li>
-        </ol>
-      </section>
-
-      <section class="panel">
-        <h3>Playlist Starr Park</h3>
-        <div id="playlist" class="playlist"></div>
-      </section>
-
-      <section class="panel now-playing">
-        <h3>Tocando agora</h3>
-        <div class="current-track">
-          <img id="cover" src="assets/covers/placeholder-cover.svg" alt="Capa da música" />
-          <div>
-            <p id="trackTitle" class="track-title">Nenhuma música selecionada</p>
-            <p id="trackTheme" class="track-theme">Clique em uma faixa para começar</p>
-          </div>
+      <div class="center-controls">
+        <div class="buttons">
+          <button id="prevBtn">⏮</button>
+          <button id="playPauseBtn">▶</button>
+          <button id="nextBtn">⏭</button>
         </div>
-        <audio id="audioPlayer" controls preload="metadata"></audio>
-      </section>
-    </main>
+        <input id="seekbar" type="range" min="0" max="100" value="0" />
+      </div>
 
-    <footer>
-      <p>
-        Fan project não afiliado à Supercell. Use apenas músicas e imagens autorizadas.
-      </p>
+      <div class="extra-controls">
+        <label>
+          Vol
+          <input id="volume" type="range" min="0" max="1" step="0.01" value="0.85" />
+        </label>
+      </div>
+
+      <audio id="audio" preload="metadata"></audio>
     </footer>
 
     <script src="script.js"></script>

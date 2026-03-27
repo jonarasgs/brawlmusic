@@ -1,48 +1,75 @@
 {
   "tracks": [
     {
-      "title": "Starr Park Main Theme",
-      "theme": "Lobby / Parque",
-      "file": "assets/music/starr-park-main-theme.mp3",
+      "title": "Welcome to Starr Park",
+      "artist": "Brawl Stars OST",
+      "theme": "Lobby",
+      "event": "Starr Park",
+      "duration": 138,
+      "file": "assets/music/welcome-to-starr-park.mp3",
       "cover": "assets/covers/placeholder-cover.svg"
     },
     {
-      "title": "Gem Grab Rush",
-      "theme": "Arena",
-      "file": "assets/music/gem-grab-rush.mp3",
+      "title": "Gem Grab Overtime",
+      "artist": "Brawl Stars OST",
+      "theme": "Battle",
+      "event": "Starr Park",
+      "duration": 124,
+      "file": "assets/music/gem-grab-overtime.mp3",
       "cover": "assets/covers/placeholder-cover.svg"
     },
     {
-      "title": "Brawlidays Night Parade",
-      "theme": "Evento sazonal",
-      "file": "assets/music/brawlidays-night-parade.mp3",
+      "title": "Ghost Station Night",
+      "artist": "Brawl Stars OST",
+      "theme": "Halloween",
+      "event": "Halloween",
+      "duration": 150,
+      "file": "assets/music/ghost-station-night.mp3",
+      "cover": "assets/covers/placeholder-cover.svg"
+    },
+    {
+      "title": "Lunar Arena Lights",
+      "artist": "Brawl Stars OST",
+      "theme": "Lunar",
+      "event": "Lunar",
+      "duration": 142,
+      "file": "assets/music/lunar-arena-lights.mp3",
+      "cover": "assets/covers/placeholder-cover.svg"
+    },
+    {
+      "title": "Brawlidays Parade",
+      "artist": "Brawl Stars OST",
+      "theme": "Holiday",
+      "event": "Brawlidays",
+      "duration": 160,
+      "file": "assets/music/brawlidays-parade.mp3",
       "cover": "assets/covers/placeholder-cover.svg"
     }
   ],
   "albums": [
     {
-      "title": "Starr Park Essentials",
+      "title": "Starr Park Core",
       "event": "Starr Park",
       "year": "2020+",
-      "description": "Coleção base para lobby, trailers e temas institucionais do parque."
+      "description": "Músicas de lobby e temas principais do parque."
     },
     {
-      "title": "Brawlidays Collection",
-      "event": "Brawlidays",
-      "year": "Dezembro",
-      "description": "Faixas com sinos, coral e energia festiva para eventos de fim de ano."
-    },
-    {
-      "title": "Lunar Festival Beats",
-      "event": "Lunar",
-      "year": "Jan/Fev",
-      "description": "Mistura de instrumentos orientais com batidas eletrônicas de combate."
-    },
-    {
-      "title": "Ghost Station Sessions",
+      "title": "Haunted Brawls",
       "event": "Halloween",
       "year": "Outubro",
-      "description": "Atmosfera assustadora com synths escuros, risadas e tensão arcade."
+      "description": "Coleção de trilhas sombrias e tensas para a temporada spooky."
+    },
+    {
+      "title": "Lunar Beats",
+      "event": "Lunar",
+      "year": "Jan/Fev",
+      "description": "Mistura de instrumentos orientais e batidas eletrônicas."
+    },
+    {
+      "title": "Brawlidays Radio",
+      "event": "Brawlidays",
+      "year": "Dezembro",
+      "description": "Faixas festivas para o evento de fim de ano."
     }
   ]
 }
