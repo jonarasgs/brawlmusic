@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Starr Sound: player de músicas inspirado em Brawl Stars com busca, playlists e player completo." />
+    <meta name="theme-color" content="#3B82F6" />
+    <title>Starr Sound • Player</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#conteudo">Pular para conteúdo principal</a>
+
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Navegação lateral">
+        <h1 class="brand">Starr Sound</h1>
+        <p class="muted">Player estilo streaming para comunidade</p>
+
+        <nav class="menu" aria-label="Menu principal">
+          <button class="menu-btn active" type="button">Início</button>
+          <button class="menu-btn" type="button">Sua biblioteca</button>
+          <button class="menu-btn" type="button">Eventos</button>
+          <button class="menu-btn" type="button">Curtidas</button>
+        </nav>
+
+        <section>
+          <h2 class="section-title">Playlists rápidas</h2>
+          <div id="quickPlaylists" class="quick-list" aria-live="polite"></div>
+        </section>
+      </aside>
+
+      <main id="conteudo" class="content">
+        <header class="topbar">
+          <label class="sr-only" for="searchInput">Buscar música, evento ou artista</label>
+          <input
+            id="searchInput"
+            class="search"
+            type="search"
+            placeholder="Buscar música, evento, artista..."
+            autocomplete="off"
+          />
+          <span class="tag">Fonte alvo: Nougat</span>
+        </header>
+
+        <p id="statusMessage" class="status" role="status" aria-live="polite">Carregando catálogo...</p>
+
+        <section aria-labelledby="destaques-title">
+          <h2 id="destaques-title">Destaques</h2>
+          <div id="highlightGrid" class="highlight-grid"></div>
+        </section>
+
+        <section aria-labelledby="tracks-title">
+          <h2 id="tracks-title">Todas as faixas</h2>
+          <div id="tracksTable" class="tracks-table" role="list"></div>
+        </section>
+      </main>
+    </div>
+
+    <footer class="playerbar" aria-label="Player de música">
+      <div class="nowplaying">
+        <img id="coverImage" src="assets/covers/placeholder-cover.svg" alt="Capa da faixa atual" />
+        <div>
+          <p id="nowTitle">Nenhuma faixa</p>
+          <p id="nowMeta" class="muted">Escolha uma música para tocar</p>
+        </div>
+      </div>
+
+      <div class="center-controls">
+        <div class="buttons">
+          <button id="prevBtn" type="button" aria-label="Faixa anterior">⏮</button>
+          <button id="playPauseBtn" type="button" aria-label="Reproduzir ou pausar">▶</button>
+          <button id="nextBtn" type="button" aria-label="Próxima faixa">⏭</button>
+        </div>
+        <label class="sr-only" for="seekbar">Progresso da música</label>
+        <input id="seekbar" type="range" min="0" max="100" value="0" />
+      </div>
+
+      <div class="extra-controls">
+        <label for="volume">Vol</label>
+        <input id="volume" type="range" min="0" max="1" step="0.01" value="0.85" />
+      </div>
+
+      <audio id="audio" preload="metadata"></audio>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
