@@ -185,3 +185,58 @@ input[type="range"] { width: 100%; accent-color: var(--brawl-red); }
   .playerbar { grid-template-columns: 1fr; height: auto; }
   .track-row { grid-template-columns: 40px 1.5fr 1fr 70px 60px; font-size: .9rem; }
 }
+
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: #111827;
+  color: #fff;
+  padding: .5rem .75rem;
+  z-index: 9999;
+}
+
+.skip-link:focus {
+  left: 10px;
+  top: 10px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.status {
+  margin: .8rem 0 0;
+  color: #eef2ff;
+  font-weight: 700;
+}
+
+.status.error {
+  color: #fee2e2;
+}
+
+.quick-item:focus-visible,
+.menu-btn:focus-visible,
+.track-row button:focus-visible,
+.buttons button:focus-visible,
+.search:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+}

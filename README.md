@@ -1,10 +1,12 @@
 # Starr Sound (Brawl-style music player)
 
-Refeito do zero para funcionar como app de música (estilo Spotify/YouTube Music):
-- busca em tempo real
-- lista completa de faixas
-- player fixo com play/pause, anterior, próxima, progresso e volume
-- dados carregados por JSON
+Projeto web de player musical inspirado em Brawl Stars, pensado para uso público (não só local/pessoal).
+
+## O que foi reforçado para público
+- Interface acessível (labels, `aria`, foco por teclado, skip link).
+- Mensagens claras de status/erro para carregamento do catálogo.
+- Renderização segura (sem injetar HTML direto do JSON nas listas principais).
+- Design responsivo para desktop e mobile.
 
 ## Paleta aplicada (como você pediu)
 - Azul base ("preto" informado): `#3B82F6`
@@ -37,8 +39,5 @@ python -m http.server 5500
 
 Depois abra `http://localhost:5500/`.
 
-## Próximos passos que posso fazer
-- login fake + playlists do usuário
-- fila (queue) arrastável
-- mini player + fullscreen player
-- visualizador de áudio animado
+## Observação legal
+Este é um projeto de fã. Verifique direitos de uso das músicas/imagens antes de publicar.

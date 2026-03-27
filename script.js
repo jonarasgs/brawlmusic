@@ -2,6 +2,7 @@ const audio = document.getElementById("audio");
 const coverImage = document.getElementById("coverImage");
 const nowTitle = document.getElementById("nowTitle");
 const nowMeta = document.getElementById("nowMeta");
+const statusMessage = document.getElementById("statusMessage");
 const searchInput = document.getElementById("searchInput");
 const quickPlaylists = document.getElementById("quickPlaylists");
 const highlightGrid = document.getElementById("highlightGrid");
@@ -25,8 +26,25 @@ function formatDuration(seconds = 0) {
   return `${mins}:${secs}`;
 }
 
+function setStatus(text, isError = false) {
+  statusMessage.textContent = text;
+  statusMessage.classList.toggle("error", isError);
+}
+
+function clearNode(node) {
+  while (node.firstChild) node.removeChild(node.firstChild);
+}
+
+function createTextElement(tag, text, className = "") {
+  const el = document.createElement(tag);
+  el.textContent = text;
+  if (className) el.className = className;
+  return el;
+}
+
 function setNowPlaying(track) {
   coverImage.src = track.cover;
+  coverImage.alt = `Capa de ${track.title}`;
   nowTitle.textContent = track.title;
   nowMeta.textContent = `${track.artist} • ${track.event}`;
 }
@@ -43,66 +61,91 @@ function playTrackByIndex(index) {
     .play()
     .then(() => {
       playPauseBtn.textContent = "⏸";
+      setStatus(`Tocando: ${track.title}`);
     })
     .catch(() => {
-      nowMeta.textContent = "Clique no botão ▶ para iniciar.";
+      setStatus("Clique no botão ▶ para iniciar a reprodução.", true);
     });
 }
 
 function renderHighlights() {
-  highlightGrid.innerHTML = "";
+  clearNode(highlightGrid);
 
   allAlbums.forEach((album) => {
     const card = document.createElement("article");
     card.className = "highlight-card";
-    card.innerHTML = `
-      <h3>${album.title}</h3>
-      <p class="muted">${album.event}</p>
-      <p>${album.description}</p>
-    `;
-    card.addEventListener("click", () => {
+    card.tabIndex = 0;
+
+    card.appendChild(createTextElement("h3", album.title));
+    card.appendChild(createTextElement("p", album.event, "muted"));
+    card.appendChild(createTextElement("p", album.description));
+
+    const onChoose = () => {
       searchInput.value = album.event;
       applySearch();
+    };
+
+    card.addEventListener("click", onChoose);
+    card.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        onChoose();
+      }
     });
+
     highlightGrid.appendChild(card);
   });
 }
 
 function renderQuickPlaylists() {
-  quickPlaylists.innerHTML = "";
+  clearNode(quickPlaylists);
 
   allAlbums.slice(0, 5).forEach((album) => {
-    const box = document.createElement("div");
-    box.className = "quick-item";
-    box.innerHTML = `<strong>${album.event}</strong><br><small>${album.year}</small>`;
-    box.addEventListener("click", () => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "quick-item";
+    button.textContent = `${album.event} • ${album.year}`;
+    button.addEventListener("click", () => {
       searchInput.value = album.event;
       applySearch();
     });
-    quickPlaylists.appendChild(box);
+    quickPlaylists.appendChild(button);
   });
 }
 
 function renderTracksTable() {
-  tracksTable.innerHTML = "";
+  clearNode(tracksTable);
+
+  if (filteredTracks.length === 0) {
+    const empty = document.createElement("div");
+    empty.className = "track-row";
+    empty.textContent = "Nenhuma faixa encontrada para essa busca.";
+    tracksTable.appendChild(empty);
+    setStatus("Nenhuma faixa encontrada.", true);
+    return;
+  }
 
   filteredTracks.forEach((track, i) => {
     const row = document.createElement("div");
     row.className = "track-row";
-    row.innerHTML = `
-      <span>${i + 1}</span>
-      <strong>${track.title}</strong>
-      <span>${track.artist}</span>
-      <span>${formatDuration(track.duration)}</span>
-      <button type="button">▶</button>
-    `;
-    row.querySelector("button").addEventListener("click", () => playTrackByIndex(i));
+    row.setAttribute("role", "listitem");
+
+    row.appendChild(createTextElement("span", String(i + 1)));
+    row.appendChild(createTextElement("strong", track.title));
+    row.appendChild(createTextElement("span", track.artist));
+    row.appendChild(createTextElement("span", formatDuration(track.duration)));
+
+    const playBtn = document.createElement("button");
+    playBtn.type = "button";
+    playBtn.textContent = "▶";
+    playBtn.setAttribute("aria-label", `Tocar ${track.title}`);
+    playBtn.addEventListener("click", () => playTrackByIndex(i));
+    row.appendChild(playBtn);
+
     tracksTable.appendChild(row);
   });
 
-  if (filteredTracks.length === 0) {
-    tracksTable.innerHTML = '<div class="track-row">Nenhuma faixa encontrada.</div>';
-  }
+  setStatus(`${filteredTracks.length} faixa(s) disponível(is).`);
 }
 
 function applySearch() {
@@ -112,12 +155,14 @@ function applySearch() {
     return [track.title, track.artist, track.event, track.theme].join(" ").toLowerCase().includes(query);
   });
 
+  currentIndex = -1;
   renderTracksTable();
 }
 
 async function init() {
   try {
-    const response = await fetch("data.json");
+    setStatus("Carregando catálogo...");
+    const response = await fetch("data.json", { cache: "no-store" });
     if (!response.ok) throw new Error("Erro ao carregar data.json");
 
     const data = await response.json();
@@ -129,7 +174,12 @@ async function init() {
     renderHighlights();
     renderTracksTable();
   } catch (error) {
-    tracksTable.innerHTML = '<div class="track-row">Falha ao carregar data.json.</div>';
+    setStatus("Falha ao carregar o catálogo. Tente atualizar a página.", true);
+    clearNode(tracksTable);
+    const errorRow = document.createElement("div");
+    errorRow.className = "track-row";
+    errorRow.textContent = "Não foi possível carregar data.json.";
+    tracksTable.appendChild(errorRow);
     console.error(error);
   }
 }
