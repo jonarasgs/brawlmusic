@@ -6,6 +6,12 @@ Refeito do zero para funcionar como app de música (estilo Spotify/YouTube Music
 - player fixo com play/pause, anterior, próxima, progresso e volume
 - dados carregados por JSON
 
+## Paleta aplicada (como você pediu)
+- Azul base ("preto" informado): `#3B82F6`
+- Vermelho logo: `#FF1118`
+- Amarelo logo: `#FBC423`
+- Branco: `#FFFFFF`
+
 ## Fonte
 A interface está preparada para usar **Nougat** como fonte principal de título.
 No CSS, `font-family: "Nougat"` já está configurado com fallback.
