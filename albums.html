@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Starr Park • Álbuns e Eventos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="noise-overlay" aria-hidden="true"></div>
+
+    <header class="top-bar">
+      <nav class="main-nav">
+        <a class="nav-pill" href="index.html">🎵 Jukebox</a>
+        <a class="nav-pill active" href="albums.html">🎫 Álbuns / Eventos</a>
+      </nav>
+      <p class="badge">Coleções temáticas</p>
+      <h1>Álbuns e Eventos</h1>
+      <p class="subtitle">Halloween, Lunar, Brawlidays e temporadas especiais</p>
+    </header>
+
+    <main class="layout albums-layout">
+      <section class="panel">
+        <h2>Filtrar por evento</h2>
+        <div id="filters" class="filters"></div>
+      </section>
+
+      <section class="panel albums-panel">
+        <h2>Coleções</h2>
+        <div id="albumGrid" class="album-grid"></div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Use esta página para organizar as músicas por tema e temporada.</p>
+    </footer>
+
+    <script src="albums.js"></script>
+  </body>
+</html>
