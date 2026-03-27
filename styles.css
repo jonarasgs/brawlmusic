@@ -1,0 +1,169 @@
+@font-face {
+  font-family: "Nougat";
+  src: local("Nougat");
+  font-display: swap;
+}
+
+:root {
+  --bg: #0d1024;
+  --bg-soft: #171b3a;
+  --panel: #1f2552;
+  --panel-2: #2a3370;
+  --line: #313b80;
+  --txt: #f4f7ff;
+  --muted: #b6bde7;
+  --yellow: #ffd33d;
+  --cyan: #3fe7ff;
+  --pink: #ff4ca6;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Nunito", "Segoe UI", sans-serif;
+  color: var(--txt);
+  background: radial-gradient(circle at top right, #2e3ec6 0, transparent 35%), var(--bg);
+}
+
+h1, h2, .brand {
+  font-family: "Nougat", "Bangers", "Impact", sans-serif;
+  letter-spacing: 0.6px;
+}
+
+.app-shell {
+  min-height: calc(100vh - 110px);
+  display: grid;
+  grid-template-columns: 290px 1fr;
+}
+
+.sidebar {
+  border-right: 1px solid var(--line);
+  padding: 1.25rem;
+  background: linear-gradient(180deg, #111736, #0d1129);
+}
+
+.brand { margin: 0; font-size: 2rem; color: var(--yellow); }
+.muted { margin: .2rem 0 0; color: var(--muted); font-size: .9rem; }
+
+.menu { margin: 1rem 0 1.5rem; display: grid; gap: .5rem; }
+.menu-btn {
+  text-align: left;
+  background: var(--bg-soft);
+  color: var(--txt);
+  border: 1px solid var(--line);
+  padding: .6rem .7rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform .12s ease, background .12s ease;
+}
+.menu-btn:hover { transform: translateX(4px); background: #222a5d; }
+.menu-btn.active { border-color: var(--cyan); }
+
+.section-title { font-size: 1rem; margin: 0 0 .5rem; }
+.quick-list { display: grid; gap: .5rem; }
+.quick-item {
+  background: linear-gradient(135deg, #29337b, #1f275f);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: .6rem;
+}
+
+.content { padding: 1.25rem; }
+.topbar { display: flex; justify-content: space-between; gap: .8rem; align-items: center; }
+.search {
+  width: min(540px, 100%);
+  padding: .7rem .9rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: #10163a;
+  color: var(--txt);
+}
+.tag {
+  font-size: .8rem;
+  color: #10122c;
+  background: linear-gradient(180deg, var(--yellow), #ffb833);
+  border-radius: 999px;
+  padding: .35rem .6rem;
+  font-weight: 900;
+}
+
+.highlight-grid {
+  margin-top: .7rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: .7rem;
+}
+.highlight-card {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: .75rem;
+  background: linear-gradient(180deg, var(--panel), var(--panel-2));
+  transform: translateY(0);
+  transition: transform .12s ease, filter .12s ease;
+  cursor: pointer;
+}
+.highlight-card:hover { transform: translateY(-3px); filter: brightness(1.06); }
+
+.tracks-table {
+  margin-top: .7rem;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.track-row {
+  display: grid;
+  grid-template-columns: 50px 1.8fr 1fr 90px 70px;
+  gap: .5rem;
+  align-items: center;
+  padding: .65rem .8rem;
+  background: #1a2150;
+  border-bottom: 1px solid #2c3775;
+}
+.track-row:nth-child(even) { background: #172047; }
+.track-row button {
+  background: linear-gradient(180deg, var(--yellow), #ffad2f);
+  border: 0;
+  border-radius: 10px;
+  padding: .4rem .5rem;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.playerbar {
+  height: 110px;
+  padding: .7rem 1rem;
+  border-top: 1px solid var(--line);
+  background: #0b1028;
+  display: grid;
+  grid-template-columns: 1fr 1fr 220px;
+  align-items: center;
+  gap: 1rem;
+}
+.nowplaying { display: flex; align-items: center; gap: .75rem; }
+.nowplaying img { width: 64px; height: 64px; border-radius: 10px; object-fit: cover; }
+#nowTitle { margin: 0; font-weight: 900; }
+#nowMeta { margin: .1rem 0 0; }
+
+.center-controls { display: grid; gap: .45rem; justify-items: center; }
+.buttons { display: flex; gap: .4rem; }
+.buttons button {
+  border: 1px solid var(--line);
+  background: #1e2758;
+  color: var(--txt);
+  border-radius: 10px;
+  min-width: 42px;
+  min-height: 34px;
+  cursor: pointer;
+}
+.buttons button:hover { background: #2a3674; }
+
+input[type="range"] { width: 100%; accent-color: var(--pink); }
+.extra-controls { justify-self: end; }
+
+@media (max-width: 980px) {
+  .app-shell { grid-template-columns: 1fr; }
+  .sidebar { border-right: 0; border-bottom: 1px solid var(--line); }
+  .playerbar { grid-template-columns: 1fr; height: auto; }
+  .track-row { grid-template-columns: 40px 1.5fr 1fr 70px 60px; font-size: .9rem; }
+}
